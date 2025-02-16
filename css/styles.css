@@ -1,0 +1,73 @@
+/* 全体のリセット */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ヘッダー背景画像 */
+.hero {
+    background-image: url('./figs/header.jpg');
+    /* GitHub Pages にアップロードした画像 */
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    /* ヘッダーの高さを調整 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* 透明なオーバーレイ */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* 半透明の黒背景 */
+}
+
+/* ヘッダー内のテキスト */
+.hero .overlay {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+/* ナビゲーションバー */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+/* メインコンテンツ */
+.content {
+    padding: 20px;
+    text-align: center;
+}
