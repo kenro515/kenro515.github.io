@@ -28,5 +28,45 @@
         <p>データを分析して、最も正確な天気予測を目指しましょう！</p>
     </div>
 
+    <!-- news list -->
+    <section class="latest-news">
+        <h2>最新情報</h2>
+        <ul id="news-list"></ul>
+    </section>
+
+    <!-- 記事表示エリア -->
+    <section class="article-content">
+        <h2>詳細記事</h2>
+        <div id="article-container">
+            <p>最新情報をクリックすると、ここに記事が表示されます。</p>
+        </div>
+    </section>
+    
+    <script>
+        async function loadNews() {
+            const response = await fetch('news.json');
+            const newsData = await response.json();
+            const newsList = document.getElementById('news-list');
+
+            newsData.forEach(news => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="#" onclick="loadArticle('${news.url}')">${news.date}: ${news.title}</a>`;
+                newsList.appendChild(listItem);
+            });
+        }
+
+        async function loadArticle(url) {
+            if (!url) {
+                document.getElementById('article-container').innerHTML = "<p>このニュースには詳細記事がありません。</p>";
+                return;
+            }
+            const response = await fetch(url);
+            const text = await response.text();
+            document.getElementById('article-container').innerHTML = `<pre>${text}</pre>`;
+        }
+
+        loadNews();
+    </script>
+    
 </body>
 </html>
