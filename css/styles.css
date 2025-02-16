@@ -6,7 +6,7 @@ body {
 
 /* ヘッダー背景画像 */
 .hero {
-    background-image: url('./figs/header.jpg');
+    background-image: url('../figs/header.jpg');
     /* GitHub Pages にアップロードした画像 */
     background-size: cover;
     background-position: center;
