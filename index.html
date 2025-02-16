@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo site</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
@@ -41,7 +42,7 @@
             <p>最新情報をクリックすると、ここに記事が表示されます。</p>
         </div>
     </section>
-    
+
     <script>
         async function loadNews() {
             const response = await fetch('news.json');
@@ -50,23 +51,16 @@
 
             newsData.forEach(news => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `<a href="#" onclick="loadArticle('${news.url}')">${news.date}: ${news.title}</a>`;
+                if (news.url) {
+                    listItem.innerHTML = `<a href="${news.url}">${news.date}: ${news.title}</a>`;
+                } else {
+                    listItem.innerHTML = `${news.date}: ${news.title}`;
+                }
                 newsList.appendChild(listItem);
             });
         }
-
-        async function loadArticle(url) {
-            if (!url) {
-                document.getElementById('article-container').innerHTML = "<p>このニュースには詳細記事がありません。</p>";
-                return;
-            }
-            const response = await fetch(url);
-            const text = await response.text();
-            document.getElementById('article-container').innerHTML = `<pre>${text}</pre>`;
-        }
-
         loadNews();
     </script>
-    
+
 </body>
 </html>
