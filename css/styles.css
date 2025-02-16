@@ -123,63 +123,31 @@ body {
     border-radius: 5px;
 }
 
-/* 結果ページのデザイン
+/* 結果ページのデザイン */
 .results-header {
     width: 80%;
     max-width: 600px;
     margin: auto;
     padding: 20px;
     text-align: left;
-} */
+}
 
-/* グラフコンテナ
+/* グラフコンテナ */
 .chart-container {
     width: 80%;
     max-width: 600px;
     margin: auto;
     text-align: center;
-} */
+}
 
-/* テーブルのデザイン
+/* テーブルのデザイン */
 .results-table {
     width: 80%;
     max-width: 600px;
     margin: auto;
     padding: 20px;
-} */
-
-/* タイトル・ボタン幅を統一 */
-.results-header,
-.filter-buttons,
-.chart-container,
-.results-table {
-    width: 80%;
-    max-width: 600px;
-    margin: auto;
 }
 
-/* フィルターボタン */
-.filter-buttons {
-    text-align: center;
-    margin: 10px 0;
-}
-
-.filter-buttons button {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-.filter-buttons button:hover {
-    background-color: #0056b3;
-}
-
-/* 表のスタイル */
 .results-table table {
     width: 100%;
     border-collapse: collapse;

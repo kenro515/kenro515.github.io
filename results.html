@@ -32,19 +32,11 @@
         <p>5つのグループの評価値を比較</p>
     </section>
 
-    <!-- フィルター機能 -->
-    <section class="filter-buttons">
-        <button onclick="updateChart('all')">すべて表示</button>
-        <button onclick="updateChart('rmse')">RMSE だけ</button>
-        <button onclick="updateChart('mae')">MAE だけ</button>
-        <button onclick="updateChart('r2')">R² だけ</button>
-    </section>
-    
-    <!-- グラフ -->
+    <!-- 棒グラフ -->
     <section class="chart-container">
         <canvas id="resultsChart"></canvas>
     </section>
-    
+
     <!-- 評価値表 -->
     <section class="results-table">
         <h2>評価値一覧</h2>
@@ -52,91 +44,74 @@
             <thead>
                 <tr>
                     <th>Group</th>
-                    <th class="col-rmse">RMSE</th>
-                    <th class="col-mae">MAE</th>
-                    <th class="col-r2">R²</th>
+                    <th>RMSE</th>
+                    <th>MAE</th>
+                    <th>R²</th>
                 </tr>
             </thead>
             <tbody id="resultsTable">
             </tbody>
         </table>
     </section>
-    
+
     <!-- 簡単な考察 -->
     <section class="analysis">
         <h2>考察</h2>
         <p>グループCが最も良い成績を収め、RMSE, MAEが低く、R²も0.88と高い値を示しました。一方で、グループDの評価値は他のグループと比較して劣っており、さらなる改善が必要です。</p>
     </section>
-    
+
     <script>
+        // 擬似的な評価値データ
         const groups = ["Group A", "Group B", "Group C", "Group D", "Group E"];
         const rmseValues = [2.4, 2.8, 2.1, 3.0, 2.5];
         const maeValues = [1.8, 2.1, 1.7, 2.5, 2.0];
         const r2Values = [0.85, 0.78, 0.88, 0.72, 0.81];
 
-        let chart;
+        // 表データを追加
+        const tableBody = document.getElementById("resultsTable");
+        groups.forEach((group, index) => {
+            const row = `<tr>
+                <td>${group}</td>
+                <td>${rmseValues[index]}</td>
+                <td>${maeValues[index]}</td>
+                <td>${r2Values[index]}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
 
-        function createChart(type = "all") {
-            const ctx = document.getElementById("resultsChart").getContext("2d");
-
-            let datasets = [];
-            if (type === "all" || type === "rmse") {
-                datasets.push({ label: "RMSE", data: rmseValues, backgroundColor: "rgba(255, 99, 132, 0.6)" });
-            }
-            if (type === "all" || type === "mae") {
-                datasets.push({ label: "MAE", data: maeValues, backgroundColor: "rgba(54, 162, 235, 0.6)" });
-            }
-            if (type === "all" || type === "r2") {
-                datasets.push({ label: "R²", data: r2Values, backgroundColor: "rgba(255, 206, 86, 0.6)" });
-            }
-
-            if (chart) {
-                chart.destroy();
-            }
-            chart = new Chart(ctx, {
-                type: "bar",
-                data: {
-                    labels: groups,
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    aspectRatio: 2,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+        // Chart.js で棒グラフ描画
+        const ctx = document.getElementById("resultsChart").getContext("2d");
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: groups,
+                datasets: [
+                    {
+                        label: "RMSE",
+                        data: rmseValues,
+                        backgroundColor: "rgba(255, 99, 132, 0.6)"
+                    },
+                    {
+                        label: "MAE",
+                        data: maeValues,
+                        backgroundColor: "rgba(54, 162, 235, 0.6)"
+                    },
+                    {
+                        label: "R²",
+                        data: r2Values,
+                        backgroundColor: "rgba(255, 206, 86, 0.6)"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
-            });
-        }
-
-        function updateTable(type) {
-            const tableBody = document.getElementById("resultsTable");
-            tableBody.innerHTML = "";
-            groups.forEach((group, index) => {
-                const row = `<tr>
-                        <td>${group}</td>
-                        <td class="col-rmse">${rmseValues[index]}</td>
-                        <td class="col-mae">${maeValues[index]}</td>
-                        <td class="col-r2">${r2Values[index]}</td>
-                    </tr>`;
-                tableBody.innerHTML += row;
-            });
-
-            document.querySelectorAll(".col-rmse").forEach(td => td.style.display = (type === "all" || type === "rmse") ? "table-cell" : "none");
-            document.querySelectorAll(".col-mae").forEach(td => td.style.display = (type === "all" || type === "mae") ? "table-cell" : "none");
-            document.querySelectorAll(".col-r2").forEach(td => td.style.display = (type === "all" || type === "r2") ? "table-cell" : "none");
-        }
-
-        function updateChart(type) {
-            createChart(type);
-            updateTable(type);
-        }
-
-        createChart("all");
-        updateTable("all");
+            }
+        });
     </script>
 
 </body>
