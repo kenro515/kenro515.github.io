@@ -123,8 +123,13 @@ body {
 
 /* 結果ページのデザイン */
 .results-header {
-    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    /* グラフと表と同じ幅 */
+    margin: auto;
     padding: 20px;
+    text-align: left;
+    /* 左揃え */
 }
 
 /* グラフコンテナ */
