@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>コンペ結果 - 天気予測コンペ</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
@@ -56,7 +56,7 @@
 
     <script>
         async function loadResults() {
-            const response = await fetch('results.json'); // JSON を取得
+            const response = await fetch('./json/results.json'); // JSON を取得
             const data = await response.json();
 
             const groups = data.groups;
