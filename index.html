@@ -37,7 +37,7 @@
 
     <script>
         async function loadNews() {
-            const response = await fetch('news.json');
+            const response = await fetch('./json/news.json');
             const newsData = await response.json();
             const newsList = document.getElementById('news-list');
 

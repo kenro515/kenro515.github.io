@@ -42,15 +42,9 @@
         <h2>評価値一覧</h2>
         <table>
             <thead>
-                <tr>
-                    <th>Group</th>
-                    <th>RMSE</th>
-                    <th>MAE</th>
-                    <th>R²</th>
-                </tr>
+                <tr id="table-header"></tr>
             </thead>
-            <tbody id="resultsTable">
-            </tbody>
+            <tbody id="table-body"></tbody>
         </table>
     </section>
 
@@ -61,57 +55,50 @@
     </section>
 
     <script>
-        // 擬似的な評価値データ
-        const groups = ["Group A", "Group B", "Group C", "Group D", "Group E"];
-        const rmseValues = [2.4, 2.8, 2.1, 3.0, 2.5];
-        const maeValues = [1.8, 2.1, 1.7, 2.5, 2.0];
-        const r2Values = [0.85, 0.78, 0.88, 0.72, 0.81];
+        async function loadResults() {
+            const response = await fetch('results.json'); // JSON を取得
+            const data = await response.json();
 
-        // 表データを追加
-        const tableBody = document.getElementById("resultsTable");
-        groups.forEach((group, index) => {
-            const row = `<tr>
-                <td>${group}</td>
-                <td>${rmseValues[index]}</td>
-                <td>${maeValues[index]}</td>
-                <td>${r2Values[index]}</td>
-            </tr>`;
-            tableBody.innerHTML += row;
-        });
+            const groups = data.groups;
+            const metrics = data.metrics;
 
-        // Chart.js で棒グラフ描画
-        const ctx = document.getElementById("resultsChart").getContext("2d");
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: groups,
-                datasets: [
-                    {
-                        label: "RMSE",
-                        data: rmseValues,
-                        backgroundColor: "rgba(255, 99, 132, 0.6)"
-                    },
-                    {
-                        label: "MAE",
-                        data: maeValues,
-                        backgroundColor: "rgba(54, 162, 235, 0.6)"
-                    },
-                    {
-                        label: "R²",
-                        data: r2Values,
-                        backgroundColor: "rgba(255, 206, 86, 0.6)"
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
+            // 表ヘッダーの作成
+            const headerRow = document.getElementById("table-header");
+            headerRow.innerHTML = "<th>Group</th>" + metrics.map(m => `<th>${m}</th>`).join("");
+
+            // 表データの作成
+            const tableBody = document.getElementById("table-body");
+            tableBody.innerHTML = groups.map(group =>
+                `<tr><td>${group.name}</td>` + metrics.map(m => `<td>${group[m]}</td>`).join("") + "</tr>"
+            ).join("");
+
+            // グラフデータの準備
+            const ctx = document.getElementById("resultsChart").getContext("2d");
+            const datasets = metrics.map((metric, i) => ({
+                label: metric,
+                data: groups.map(g => g[metric]),
+                backgroundColor: `rgba(${(i * 100) % 255}, ${(i * 150) % 255}, ${(i * 200) % 255}, 0.6)`
+            }));
+
+            // グラフ描画
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: groups.map(g => g.name),
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    aspectRatio: 2,
+                    scales: {
+                        y: { beginAtZero: true }
                     }
                 }
-            }
-        });
+            });
+        }
+    
+        loadResults();
     </script>
 
 </body>

@@ -1,0 +1,10 @@
+{
+    "metrics": ["RMSE", "MAE", "R²"],
+    "groups": [
+        {"name": "Group A", "RMSE": 2.4, "MAE": 1.8, "R²": 0.85},
+        {"name": "Group B", "RMSE": 2.8, "MAE": 2.1, "R²": 0.78},
+        {"name": "Group C", "RMSE": 2.1, "MAE": 1.7, "R²": 0.88},
+        {"name": "Group D", "RMSE": 3.0, "MAE": 2.5, "R²": 0.72},
+        {"name": "Group E", "RMSE": 2.5, "MAE": 2.0, "R²": 0.81}
+    ]
+}
