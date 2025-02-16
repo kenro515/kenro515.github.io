@@ -42,6 +42,15 @@ body {
     font-size: 1.2em;
 }
 
+/* 「ようこそ！」セクション */
+.welcome {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    margin: 20px;
+}
+
 /* ナビゲーションバー */
 .navbar {
     display: flex;
