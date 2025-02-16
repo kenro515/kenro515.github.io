@@ -3,20 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages 動的ページ</title>
+    <title>Demo site</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* navigation bar */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* image setup */
+        .header-image {
+            width: 100%;
+            height: auto;
+        }
+
+        /* content setup */
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
-    <h1>天気情報</h1>
-    <p id="weather"></p>
 
-    <script>
-        fetch('https://api.open-meteo.com/v1/forecast?latitude=35.6895&longitude=139.6917&current_weather=true')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('weather').textContent = `東京の気温: ${data.current_weather.temperature}°C`;
-            })
-            .catch(error => console.error('エラー:', error));
-    </script>
+    <!-- image -->
+    <img src="header.jpg" alt="コンペサイトのヘッダー画像" class="header-image">
+
+    <!-- navigation bar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="data.md">Data</a>
+        <a href="results.md">Results</a>
+    </div>
+
+    <!-- content area -->
+    <div class="content">
+        <h1>天気予測コンペサイトへようこそ！</h1>
+        <p>ここではデータを分析し、結果を競い合うことができます。</p>
+    </div>
 
 </body>
 </html>
