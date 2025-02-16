@@ -136,6 +136,7 @@ body {
 .chart-container {
     width: 80%;
     max-width: 600px;
+    max-height: 200px;
     margin: auto;
     text-align: center;
 }
