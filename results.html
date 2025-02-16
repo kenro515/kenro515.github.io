@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コンペ結果 - 天気予測コンペ</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- ナビゲーションバー -->
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="data.md">Data</a>
+        <a href="results.html">Results</a>
+    </nav>
+
+    <!-- タイトル -->
+    <section class="results-header">
+        <h1>コンペ結果</h1>
+        <p>5つのグループの評価値を比較</p>
+    </section>
+
+    <!-- 棒グラフ -->
+    <section class="chart-container">
+        <canvas id="resultsChart"></canvas>
+    </section>
+
+    <!-- 評価値表 -->
+    <section class="results-table">
+        <h2>評価値一覧</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Group</th>
+                    <th>RMSE</th>
+                    <th>MAE</th>
+                    <th>R²</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTable">
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 簡単な考察 -->
+    <section class="analysis">
+        <h2>考察</h2>
+        <p>グループCが最も良い成績を収め、RMSE, MAEが低く、R²も0.88と高い値を示しました。一方で、グループDの評価値は他のグループと比較して劣っており、さらなる改善が必要です。</p>
+    </section>
+
+    <script>
+        // 擬似的な評価値データ
+        const groups = ["Group A", "Group B", "Group C", "Group D", "Group E"];
+        const rmseValues = [2.4, 2.8, 2.1, 3.0, 2.5];
+        const maeValues = [1.8, 2.1, 1.7, 2.5, 2.0];
+        const r2Values = [0.85, 0.78, 0.88, 0.72, 0.81];
+
+        // 表データを追加
+        const tableBody = document.getElementById("resultsTable");
+        groups.forEach((group, index) => {
+            const row = `<tr>
+                <td>${group}</td>
+                <td>${rmseValues[index]}</td>
+                <td>${maeValues[index]}</td>
+                <td>${r2Values[index]}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+
+        // Chart.js で棒グラフ描画
+        const ctx = document.getElementById("resultsChart").getContext("2d");
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: groups,
+                datasets: [
+                    {
+                        label: "RMSE",
+                        data: rmseValues,
+                        backgroundColor: "rgba(255, 99, 132, 0.6)"
+                    },
+                    {
+                        label: "MAE",
+                        data: maeValues,
+                        backgroundColor: "rgba(54, 162, 235, 0.6)"
+                    },
+                    {
+                        label: "R²",
+                        data: r2Values,
+                        backgroundColor: "rgba(255, 206, 86, 0.6)"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

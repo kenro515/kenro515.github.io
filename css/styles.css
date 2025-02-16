@@ -120,3 +120,45 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
+
+/* 結果ページのデザイン */
+.results-header {
+    text-align: center;
+    padding: 20px;
+}
+
+.chart-container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.results-table {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+.results-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.results-table th,
+.results-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.results-table th {
+    background-color: #f4f4f4;
+}
+
+.analysis {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
