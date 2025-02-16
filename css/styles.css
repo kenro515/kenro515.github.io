@@ -136,7 +136,7 @@ body {
 .chart-container {
     width: 80%;
     max-width: 600px;
-    max-height: 200px;
+    max-height: 300px;
     margin: auto;
     text-align: center;
 }
@@ -170,6 +170,16 @@ body {
 /* 考察エリア */
 .analysis {
     width: 80%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    text-align: left;
+}
+
+/* under construction */
+.under-construction {
+    background-color: white;
+    border-radius: 5px;
     max-width: 600px;
     margin: auto;
     padding: 20px;
