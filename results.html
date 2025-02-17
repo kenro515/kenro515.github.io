@@ -80,6 +80,8 @@
                 backgroundColor: `rgba(${(i * 100) % 255}, ${(i * 150) % 255}, ${(i * 200) % 255}, 0.6)`
             }));
 
+            const maxValue = 5; // Math.max(...groups.flatMap(g => metrics.map(m => g[m]))) * 1.2;
+
             // グラフ描画
             new Chart(ctx, {
                 type: "bar",
@@ -92,7 +94,10 @@
                     maintainAspectRatio: false,
                     aspectRatio: 2,
                     scales: {
-                        y: { beginAtZero: true }
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: maxValue
+                        }
                     }
                 }
             });
