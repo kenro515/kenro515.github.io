@@ -136,7 +136,7 @@ body {
 /* グラフコンテナ */
 .chart-container {
     width: 80%;
-    height: 500px;
+    height: 350px;
     max-width: 600px;
     margin: auto;
     text-align: center;
